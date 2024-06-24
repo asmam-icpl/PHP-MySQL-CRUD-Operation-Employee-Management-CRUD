@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Checkout your code repository
                 git url: 'https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git', branch: 'sub'
             }
         }
@@ -12,9 +13,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        // Run Gitleaks scan using Docker
+                        // Run gitleaks scan using Docker
                         bat """
-                        docker run --rm -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD:/repo -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks.toml:/gitleaks.toml zricethezav/gitleaks detect --source=/repo --config=/gitleaks.toml > gitleaks_report.json
+                        docker run --rm -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD:/repo -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks.toml:/gitleaks.toml zricethezav/gitleaks detect --source=/repo --config=/gitleaks.toml
                         """
                     } catch (Exception e) {
                         // Handle the exception by marking the build as unstable
@@ -29,21 +30,18 @@ pipeline {
                 script {
                     try {
                         // Read the JSON report
-                        def report = readFile 'gitleaks_report.json'
+                        def report = readFile 'C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks_report.json'
                         echo "Gitleaks Report: ${report}"
                         
                         // Optionally, you can parse the JSON if needed
+                        def reportJson = readJSON text: report
                         // Process the JSON content as required
                         
                         // For example, you can check for specific issues or publish the report
-                        // You can use regular expressions or other methods to extract information from the report
-                        // Example:
-                        if (report.contains('password')) {
-                            echo "Password found in Gitleaks report!"
+                        if (reportJson) {
+                            // Do something with the JSON report, e.g., save it to an artifact
+                            archiveArtifacts artifacts: 'C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks_report.json', allowEmptyArchive: true
                         }
-                        
-                        // Archive the JSON report for further analysis or download
-                        archiveArtifacts artifacts: 'gitleaks_report.json', allowEmptyArchive: true
                     } catch (Exception e) {
                         // Handle exceptions if reading the file fails
                         currentBuild.result = 'UNSTABLE'
@@ -54,5 +52,6 @@ pipeline {
         }
 
         // Add more stages here if needed
+
     }
 }
