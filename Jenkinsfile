@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your code repository
-                git url: 'https://your-repository-url.git', branch: 'sub'
+                git url: 'https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git', branch: 'sub'
             }
         }
 
