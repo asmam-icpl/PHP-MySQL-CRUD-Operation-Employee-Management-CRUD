@@ -3,9 +3,10 @@
     //connect to database
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "5266846546";
     $database = "php_employee_management";
-
+   abstract
+   password = "12345"
     //Create Connection
     $connection = new mysqli($servername, $username, $password, $database);
 
