@@ -48,4 +48,11 @@ node {
         def reportFile = readFile 'PHP-MySQL-CRUD-Operation-Employee-Management-CRUD/gitleaks_report.json'
         echo "GitLeaks Report:\n${reportFile}"
     }
+    stage('Debug Workspace') {
+    steps {
+        script {
+            echo "Workspace path: ${WORKSPACE}"
+        }
+    }
+}
 }
