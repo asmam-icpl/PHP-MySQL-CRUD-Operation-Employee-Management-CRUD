@@ -60,32 +60,21 @@ pipeline {
             }
         }
 
-        stage('Install Gitleaks') {
-            steps {
-                script {
-                    // Download gitleaks for Windows
-                    bat 'powershell -command "Invoke-WebRequest -Uri (Invoke-RestMethod -Uri https://api.github.com/repos/zricethezav/gitleaks/releases/latest).assets | Where-Object { $_.name -like \\"*windows-amd64.zip\\" } | ForEach-Object { Invoke-WebRequest -Uri $_.browser_download_url -OutFile gitleaks.zip }"'
-                    // Extract gitleaks
-                    bat 'powershell -command "Expand-Archive -Path gitleaks.zip -DestinationPath ."'
-                    // Move gitleaks to a directory in the PATH (e.g., C:\\tools\\gitleaks)
-                    bat 'powershell -command "Move-Item -Path .\\gitleaks.exe -Destination C:\\tools\\gitleaks.exe"'
-                }
-            }
-        }
+       
 
-        stage('Scan Repository') {
-            steps {
-                script {
-                    try {
-                        // Run gitleaks scan
-                        bat 'C:\\tools\\gitleaks.exe detect --source . --report-format=json --report-path=gitleaks_report.json'
-                    } catch (Exception e) {
-                        // Handle the exception by marking the build as unstable
-                        currentBuild.result = 'UNSTABLE'
-                    }
+       stage('Scan Repository') {
+        steps {
+            script {
+                try {
+                    // Run gitleaks scan using Docker
+                    bat 'docker run --rm -v %cd%:/src zricethezav/gitleaks:latest detect --source /src --report-format=json --report-path=/src/gitleaks_report.json'
+                } catch (Exception e) {
+                    // Handle the exception by marking the build as unstable
+                    currentBuild.result = 'UNSTABLE'
                 }
             }
         }
+    }
 
         stage('Publish Report') {
             steps {
