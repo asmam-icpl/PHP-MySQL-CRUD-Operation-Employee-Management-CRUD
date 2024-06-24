@@ -1,0 +1,7 @@
+title = "gitleaks config"
+
+[[rules]]
+description = "Generic Password"
+regex = '''(?i)(password\s*=\s*["'].*["'])'''
+
+
