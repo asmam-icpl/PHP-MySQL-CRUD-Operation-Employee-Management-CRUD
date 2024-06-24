@@ -47,9 +47,9 @@ pipeline {
 
     environment {
         // Replace with your Git repository URL
-        REPO_URL = 'https://github.com/your/repository.git'
+        REPO_URL = 'https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
         // Define the branch to scan
-        BRANCH = 'main'
+        BRANCH = 'sub'
     }
 
     stages {
