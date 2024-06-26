@@ -10,7 +10,7 @@ pipeline {
 
         stage('Run TruffleHog') {
             steps {
-                sh 'trufflehog --json https://your-git-repository-url.git > trufflehog_output.json'
+                bat 'trufflehog --json https://your-git-repository-url.git > trufflehog_output.json'
             }
         }
 
