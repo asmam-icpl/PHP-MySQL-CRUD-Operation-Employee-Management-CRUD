@@ -12,8 +12,8 @@ pipeline {
             steps {
                 // bat pip install trufflehog
                 // bat 'trufflehog --json  git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
-                bat 'docker pull trufflesecurity/trufflehog '
-                bat 'docker run trufflesecurity/trufflehog --json git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
+                //bat 'docker pull trufflesecurity/trufflehog '
+                //bat 'docker run trufflesecurity/trufflehog --json git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
                 //bat 'echo  "${BUILD_NUMBER}${WORKSPACE}/trufflehog_output.json"
                 bat 'echo env.BUILD_NUMBER'
             }
