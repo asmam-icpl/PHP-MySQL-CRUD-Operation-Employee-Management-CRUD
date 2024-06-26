@@ -5,6 +5,7 @@
     $username = "root";
     $password = "5266846546";
     $database = "php_employee_management";
+   password = 123456
    abstract
    password = "12345"
     //Create Connection
