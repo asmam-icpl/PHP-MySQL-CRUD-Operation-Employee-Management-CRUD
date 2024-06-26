@@ -1,58 +1,48 @@
-// node {
-//   stage('SCM') {
-//     checkout scm
-//   }
-//   stage('SonarQube Analysis') {
-//     def scannerHome = tool 'SonarScanner';
-//     withSonarQubeEnv() {
-//       bat "${scannerHome}/bin/sonar-scanner"
-//     }
-//   }
-// }
-//-------------------------second---------------------------
-// node {
-//     stage('SCM') {
-//         checkout scm
-//     }
-//     stage('SonarQube Analysis') {
-//         def scannerHome = tool 'SonarScanner';
-//         withSonarQubeEnv() {
-//             bat "${scannerHome}/bin/sonar-scanner"
-//         }
-//     }
-//     stage('GitLeaks Scan') {
-//         // Add your GitLeaks scanning step here
-//         // Example:
-//         bat 'docker run --rm -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD:/repo -v C:\\Users\\AsmaM\\code_infopercep\\git-leaks\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks.toml:/gitleaks.toml zricethezav/gitleaks detect --source="/repo" --config="/gitleaks.toml" --report-path="/repo/gitleaks_report.json" --report-format="json"'
-//     }
-// }
+pipeline {
+    agent any
 
-//-------------------3-------------------
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url:' https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
+            }
+        }
 
-node {
-    stage('SCM') {
-        checkout scm
-    }
-    stage('SonarQube Analysis') {
-        def scannerHome = tool 'SonarScanner';
-        withSonarQubeEnv() {
-            bat "${scannerHome}/bin/sonar-scanner"
+        stage('Run TruffleHog') {
+            steps {
+                // bat pip install trufflehog
+                // bat 'trufflehog --json  git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
+                bat 'docker pull trufflesecurity/trufflehog '
+                bat 'docker run trufflesecurity/trufflehog git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
+            }
+        }
+
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //             def scannerHome = tool 'SonarScanner'
+        //             withSonarQubeEnv('SonarQube') {
+        //                 bat "${scannerHome}/bin/sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Post-Processing') {
+        //     steps {
+        //         script {
+        //             def output = readFile('trufflehog_output.json')
+        //             if (output.contains('Reason')) {
+        //                 error('Secrets detected by TruffleHog!')
+        //             }
+        //         }
+        //     }
+        // }
+
+        stage('Cleanup') {
+            steps {
+                deleteDir()
+            }
         }
     }
-    stage('GitLeaks Scan') {
-        // GitLeaks scanning step
-        bat 'docker run --rm -v %WORKSPACE%\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD:/repo -v %WORKSPACE%\\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD\\gitleaks.toml:/gitleaks.toml zricethezav/gitleaks detect --source="/repo" --config="/gitleaks.toml" --report-path="/repo/gitleaks_report.json" --report-format="json"'
-    }
-    stage('Display GitLeaks Report') {
-        // Display the contents of the GitLeaks report in the console
-        def reportFile = readFile 'PHP-MySQL-CRUD-Operation-Employee-Management-CRUD/gitleaks_report.json'
-        echo "GitLeaks Report:\n${reportFile}"
-    }
-    stage('Debug Workspace') {
-    steps {
-        script {
-            echo "Workspace path: ${WORKSPACE}"
-        }
-    }
-}
 }
