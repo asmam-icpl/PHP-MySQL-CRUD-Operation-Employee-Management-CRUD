@@ -21,16 +21,13 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    def scannerHome = tool 'SonarScanner'
-                    withSonarQubeEnv('SonarQube') {
-                        bat "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
+         stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      bat "${scannerHome}/bin/sonar-scanner"
+    }
+  }
+
 
         // stage('Post-Processing') {
         //     steps {
@@ -43,10 +40,10 @@ pipeline {
         //     }
         // }
 
-        stage('Cleanup') {
-            steps {
-                deleteDir()
-            }
-        }
+        // stage('Cleanup') {
+        //     steps {
+        //         deleteDir()
+        //     }
+        // }
     }
 }
