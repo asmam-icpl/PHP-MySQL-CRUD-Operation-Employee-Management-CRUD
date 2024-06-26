@@ -10,7 +10,8 @@ pipeline {
 
         stage('Run TruffleHog') {
             steps {
-                bat 'trufflehog --json  https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
+                bat pip install trufflehog
+                bat 'trufflehog --json  git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
             }
         }
 
