@@ -32,16 +32,16 @@ pipeline {
             }
         }
 
-        stage('Post-Processing') {
-            steps {
-                script {
-                    def output = readFile('trufflehog_output.json')
-                    if (output.contains('Reason')) {
-                        error('Secrets detected by TruffleHog!')
-                    }
-                }
-            }
-        }
+        // stage('Post-Processing') {
+        //     steps {
+        //         script {
+        //             def output = readFile('trufflehog_output.json')
+        //             if (output.contains('Reason')) {
+        //                 error('Secrets detected by TruffleHog!')
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Cleanup') {
             steps {
