@@ -5,7 +5,7 @@
     $username = "root";
     $password = "";
     $database = "php_employee_management";
-
+    $AZURE_CLIENT_SECRET=  "9Rv7Q~0rg4K8uOVIGmqUGJxXkLjjQ8OpJGBo2c-H";
     //Create Connection
     $connection = new mysqli($servername, $username, $password, $database);
 
