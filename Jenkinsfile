@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url:' https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'main', url:' https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
+        //     }
+        // }
 
         stage('Run TruffleHog') {
             steps {
