@@ -1,3 +1,4 @@
+"AZURE_CLIENT_SECRET": "9Rv7Q~0rg4K8uOVIGmqUGJxXkLjjQ8OpJGBo2c-H",`,
 <?php
 
     //connect to database
