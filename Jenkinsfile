@@ -17,7 +17,7 @@ pipeline {
                 //bat 'echo  "${BUILD_NUMBER}${WORKSPACE}/trufflehog_output.json"
                 echo "Workspace directory: ${WORKSPACE}"
                 echo "Build number: ${BUILD_NUMBER}"
-                ehco ${WORKSPACE}/trufflehog_output.json
+                //ehco ${WORKSPACE}/trufflehog_output.json
             }
         }
 
