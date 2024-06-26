@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'sub', url:'https://your-git-repository-url.git'
+                git branch: 'sub', url:' https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git'
             }
         }
 
         stage('Run TruffleHog') {
             steps {
-                bat 'trufflehog --json https://your-git-repository-url.git > trufflehog_output.json'
+                bat 'trufflehog --json  https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > trufflehog_output.json'
             }
         }
 
