@@ -43,7 +43,7 @@ pipeline {
     stage('workspace file'){
             steps
             {
-                echo "{WORKSPACE}/trufflehog_output.json"
+                echo "${WORKSPACE}/trufflehog_output.json"
             }
         }    
     }
