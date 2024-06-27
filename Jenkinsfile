@@ -34,7 +34,7 @@ pipeline {
                     echo "The TruffleHog output file is located at: ${outputFilePath}"
                     
                     // Optionally, read the file content and print it (for debugging purposes)
-                    bat "type ${outputFilePath}"
+                    //bat "type ${outputFilePath}"
 
                     
                 }
@@ -43,7 +43,7 @@ pipeline {
     stage('workspace file'){
             steps
             {
-                echo "${WORKSPACE}/trufflehog_output.json"
+                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/ws/trufflehog_output.json"
             }
         }    
     }
