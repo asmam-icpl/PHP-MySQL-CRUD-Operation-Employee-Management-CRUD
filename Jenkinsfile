@@ -44,7 +44,7 @@
             steps
             {
                 //echo "${env.JENKINS_URL}job/${env.JOB_NAME}/ws/trufflehog_output.json"
-                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/trufflehog_output.json"
+                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/*zip*/trufflehog_output.json"
 
             }
         }    
