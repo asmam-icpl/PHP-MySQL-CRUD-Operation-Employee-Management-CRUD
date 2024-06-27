@@ -43,7 +43,10 @@ pipeline {
     stage('workspace file'){
             steps
             {
-                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/ws/trufflehog_output.json"
+                //echo "${env.JENKINS_URL}job/${env.JOB_NAME}/ws/trufflehog_output.json"
+                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.JOB_BUILD_NUMBER}/execution/node/${env.NODE_NAME}/ws/trufflehog_output.json"
+
+
             }
         }    
     }
