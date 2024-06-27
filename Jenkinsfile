@@ -28,7 +28,7 @@ pipeline {
                     bat 'docker pull trufflesecurity/trufflehog'
                     
                     // Run TruffleHog and save the output to a file in the workspace
-                    bat "docker run --rm trufflesecurity/trufflehog --json git https://github.com/trufflesecurity/trufflehog.git > ${outputFilePath}"
+                    bat "docker run --rm trufflesecurity/trufflehog --json git https://github.com/asmam-icpl/PHP-MySQL-CRUD-Operation-Employee-Management-CRUD.git > ${outputFilePath}"
                     
                     // Print the path of the output file
                     echo "The TruffleHog output file is located at: ${outputFilePath}"
