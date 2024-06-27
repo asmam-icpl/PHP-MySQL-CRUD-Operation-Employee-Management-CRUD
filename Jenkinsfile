@@ -2,11 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('SCM Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+         stage('Checkout') {
+             steps {
+                 git branch: 'main', url:' https://github.com/trufflesecurity/trufflehog.git'
+             }
+         }
+
+
         
         stage('SonarQube Analysis') {
             steps {
