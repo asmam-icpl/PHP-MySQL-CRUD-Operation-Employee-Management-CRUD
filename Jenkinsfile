@@ -35,8 +35,16 @@ pipeline {
                     
                     // Optionally, read the file content and print it (for debugging purposes)
                     bat "type ${outputFilePath}"
+
+                    
                 }
             }
         }
+    stage('workspace file'){
+            steps
+            {
+                echo "{WORKSPACE}/trufflehog_output.json"
+            }
+        }    
     }
 }
