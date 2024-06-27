@@ -50,11 +50,18 @@
     //     }
     stage('trivy scan'){
             steps{
-                  docker pull aquasec/trivy
-                  
-             
+                  bat 'docker pull aquasec/trivy'
+                  bat 'docker build -t my-php-app . '
+                  bat 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v C:\Users\AsmaM\code\php\PHP-MySQL-CRUD-Operation-Employee-Management-CRUD:/root/.cache/ aquasec/trivy image --format json --output /root/.cache/trivy-report.json my-php-app '
+                   
             }
-     
+     stage('trivy report'){
+           steps{
+                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/trivy-report.json"
+
+            
+           }
+     }
     }
      
     }
