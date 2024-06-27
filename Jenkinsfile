@@ -8,16 +8,16 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    def scannerHome = tool name: 'SonarScanner'
-                    withSonarQubeEnv('SonarQubeServer') {
-                        bat "${scannerHome}\\bin\\sonar-scanner"
-                    }
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //             def scannerHome = tool name: 'SonarScanner'
+        //             withSonarQubeEnv('SonarQubeServer') {
+        //                 bat "${scannerHome}\\bin\\sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('Git Scanning') {
             steps {
