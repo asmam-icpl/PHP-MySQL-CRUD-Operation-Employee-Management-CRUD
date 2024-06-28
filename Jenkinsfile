@@ -63,12 +63,12 @@
      stage('trivy scan') {
     steps {
         script {
-            def outputFilePath = "${env.WORKSPACE}/output"
+            def outputFilePath = "${env.WORKSPACE}"
             bat 'docker pull aquasec/trivy'
             bat 'docker build -t my-php-app .'
             // Ensure the output directory exists
             
-            bat " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${outputFilePath}:/output aquasec/trivy:latest image --format template --template "@contrib/html.tpl" -o report.html my-php-app:latest "
+            bat " docker run --rm  aquasec/trivy --json git https://github.com/trufflesecurity/trufflehog.git > ${outputFilePath}"
         }
     }
 }
