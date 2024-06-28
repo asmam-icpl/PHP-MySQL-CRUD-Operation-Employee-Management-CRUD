@@ -85,7 +85,7 @@
              bat 'docker pull anchore/syft:latest'
              bat 'docker build -t my-php-app .'
              //bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table'
-             bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table > outputFilePath' 
+             bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table > ${outputFilePath}' 
            }
         }
         }
