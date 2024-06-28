@@ -67,10 +67,10 @@
             bat 'docker pull aquasec/trivy'
             bat 'docker build -t my-php-app .'
             // Ensure the output directory exists
-            bat "mkdir ${outputFilePath}"
+            
             bat """
                 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v ${outputFilePath}:/output \
-                aquasec/trivy:latest image --format template --template "@contrib/html.tpl" -o /output/report.html \
+                aquasec/trivy:latest image --format template --template "@contrib/html.tpl" -o report.html \
                 my-php-app:latest
             """
         }
