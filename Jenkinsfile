@@ -78,18 +78,7 @@
 //     }
 // }
 
-        stage('syft scan')
-        {
-        steps{
-           script{
-             //def outputFilePath = "${env.WORKSPACE}\\syft_output.txt"
-             bat 'docker pull anchore/syft:latest'
-             bat 'docker build -t my-php-app .'
-             //bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table'
-             bat  " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table > syft_output.txt"
-           }
-        }
-        }
+        
      // stage('trivy report'){
      //       steps{
      //            echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/trivy-report.json"
@@ -97,6 +86,47 @@
             
      //       }
      // }
+    
+    
+    //------------------------------------------//
+     
+     // stage('syft scan')
+     //    {
+     //    steps{
+     //       script{
+     //         bat 'docker pull anchore/syft:latest'
+     //         bat 'docker build -t my-php-app .'
+     //         bat  " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table > syft_output.txt"
+     //       }
+     //    }
+     //    }
+
+     
+     
+    // stage('syft report'){
+    //        steps{
+    //             echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/syft_output.txt"
+
+            
+    //        }
+    //  }
+    
+    //---------------------------------------------------//
+    stage('gryp scan')
+        {
+        steps{
+           script{
+             bat 'docker pull anchore/grype:latest'
+             bat 'docker build -t my-php-app .'
+             bat  " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/grype:latest my-php-app -o table > grype_output.txt"
+           }
+        }
+        }
+
+       stage('gryp report'){
+           steps{
+                echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/gryp_output.txt"
+
     }
      
     }
