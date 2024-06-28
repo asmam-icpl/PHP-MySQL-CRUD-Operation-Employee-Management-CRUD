@@ -64,7 +64,7 @@
 //     steps {
 //         script {
 //             
-               def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
+               //def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
 //             bat 'docker pull aquasec/trivy'
 //             bat 'docker build -t my-php-app .'
 //             // Ensure the output directory exists
@@ -82,11 +82,11 @@
         {
         steps{
            script{
-             def outputFilePath = "${env.WORKSPACE}\\syft_output.txt"
+             //def outputFilePath = "${env.WORKSPACE}\\syft_output.txt"
              bat 'docker pull anchore/syft:latest'
              bat 'docker build -t my-php-app .'
              //bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table'
-             bat  " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table > ${outputFilePath} "
+             bat  " docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table \syft_output.txt"
            }
         }
         }
