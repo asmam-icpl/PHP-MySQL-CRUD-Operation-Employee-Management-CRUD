@@ -78,6 +78,7 @@
 // }
 
         stage('syft scan')
+        {
         steps{
            script{
              def outputFilePath = "${env.WORKSPACE}\\syft_output.txt"
@@ -85,6 +86,7 @@
              bat 'docker build -t my-php-app .'
              bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table'
            }
+        }
         }
      // stage('trivy report'){
      //       steps{
