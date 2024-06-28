@@ -60,24 +60,32 @@
 //     }
 // }
 
-     stage('trivy scan') {
-    steps {
-        script {
-            def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
-            bat 'docker pull aquasec/trivy'
-            bat 'docker build -t my-php-app .'
-            // Ensure the output directory exists
+//      stage('trivy scan') {
+//     steps {
+//         script {
+//             def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
+//             bat 'docker pull aquasec/trivy'
+//             bat 'docker build -t my-php-app .'
+//             // Ensure the output directory exists
             
-            //bat "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image -f table my-php-app:latest"
+//             //bat "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image -f table my-php-app:latest"
             
-            bat """
-            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --format template --template '@contrib/html.tpl' -o /trivy_output.html my-php-app:latest
-"""
+//             bat """
+//             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --format template --template '@contrib/html.tpl' -o /trivy_output.html my-php-app:latest
+// """
+//         }
+//     }
+// }
+
+        stage('syft scan')
+        steps{
+           script{
+             def outputFilePath = "${env.WORKSPACE}\\syft_output.txt"
+             bat 'docker pull anchore/syft:latest'
+             bat 'docker build -t my-php-app .'
+             bat  'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock anchore/syft:latest my-php-app -o table'
+           }
         }
-    }
-}
-
-
      // stage('trivy report'){
      //       steps{
      //            echo "${env.JENKINS_URL}job/${env.JOB_NAME}/${env.BUILD_NUMBER}/execution/node/3/ws/trivy-report.json"
