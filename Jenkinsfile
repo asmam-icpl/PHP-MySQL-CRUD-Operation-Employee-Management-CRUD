@@ -63,12 +63,13 @@
 //      stage('trivy scan') {
 //     steps {
 //         script {
-//             def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
+//             def outputFilePath2 = "${env.WORKSPACE}\\trivy_output2.txt"
+               def outputFilePath = "${env.WORKSPACE}\\trivy_output.html"
 //             bat 'docker pull aquasec/trivy'
 //             bat 'docker build -t my-php-app .'
 //             // Ensure the output directory exists
             
-//             //bat "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image -f table my-php-app:latest > ${outputFilePath}"
+//             //bat "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image -f table my-php-app:latest > ${outputFilePath2}"
             
 //             bat """
 //             docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --format template --template '@contrib/html.tpl' -o /trivy_output.html my-php-app:latest
